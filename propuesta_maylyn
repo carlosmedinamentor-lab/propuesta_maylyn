@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta Exclusiva — Maylyn López</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8D5A3;
+  --gold-dark: #A07D2E;
+  --champagne: #F5E6C8;
+  --ivory: #FAF7F0;
+  --deep-navy: #0A0E1A;
+  --navy: #111827;
+  --charcoal: #1A1F2E;
+  --warm-white: #FEFCF7;
+  --rose: #C4787A;
+  --rose-soft: #E8A5A7;
+  --text-dark: #1A1A2E;
+  --text-muted: #6B7280;
+  --emerald: #2D6A4F;
+  --emerald-light: #40916C;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-dark);
+  background: var(--warm-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== NOISE TEXTURE OVERLAY ========== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--deep-navy); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.6); }
+}
+
+@keyframes draw-line {
+  from { width: 0; }
+  to { width: 80px; }
+}
+
+@keyframes count-up {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+  min-height: 100vh;
+  background: var(--deep-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(196, 120, 122, 0.06) 0%, transparent 40%);
+  animation: float 12s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 900px;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  padding: 10px 28px;
+  margin-bottom: 3rem;
+  animation: fadeUp 1s ease-out 0.3s both;
+}
+
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 400;
+  color: var(--warm-white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  animation: fadeUp 1s ease-out 0.6s both;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+  margin-top: 1.5rem;
+  animation: fadeUp 1s ease-out 0.9s both;
+}
+
+.hero-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: rgba(201, 168, 76, 0.5);
+  margin-top: 3rem;
+  animation: fadeUp 1s ease-out 1.2s both;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 1s ease-out 1.5s both;
+}
+
+.scroll-indicator span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ========== SECTION BASE ========== */
+section {
+  padding: 6rem 2rem;
+}
+
+.section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ========== QUOTE / VISION SECTION ========== */
+.vision {
+  background: var(--ivory);
+  position: relative;
+}
+
+.vision::before {
+  content: '\201C';
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 10rem;
+  color: rgba(201, 168, 76, 0.1);
+  line-height: 1;
+}
+
+.vision-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 750px;
+  margin: 0 auto 2rem;
+}
+
+.vision-attribution {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.vision-attribution::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 1rem;
+}
+
+/* ========== PROBLEM SECTION ========== */
+.problem {
+  background: var(--warm-white);
+}
+
+.section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.25;
+  margin-bottom: 2rem;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+.section-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: #4A4A5A;
+  margin-bottom: 1.5rem;
+}
+
+.pain-points {
+  margin: 3rem 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.pain-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.5rem 2rem;
+  background: var(--ivory);
+  border-left: 2px solid var(--rose-soft);
+  border-radius: 0 8px 8px 0;
+  transition: all 0.3s ease;
+}
+
+.pain-point:hover {
+  border-left-color: var(--rose);
+  transform: translateX(4px);
+}
+
+.pain-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pain-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #4A4A5A;
+}
+
+.pain-text strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* ========== DARK TRANSITION ========== */
+.transition-dark {
+  background: var(--deep-navy);
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.transition-dark .transition-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.transition-dark .transition-text strong {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* ========== SOLUTION / ECOSYSTEM ========== */
+.solution {
+  background: var(--warm-white);
+  padding-bottom: 4rem;
+}
+
+.eco-title-wrapper {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.eco-title-wrapper .section-label {
+  text-align: center;
+}
+
+.eco-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.eco-title em { color: var(--gold-dark); font-style: italic; }
+
+.eco-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.deliverables {
+  display: grid;
+  gap: 0;
+  margin: 2rem 0;
+}
+
+.deliverable {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  padding: 2rem 0;
+  transition: all 0.3s ease;
+}
+
+.deliverable:hover {
+  background: rgba(201, 168, 76, 0.03);
+  padding-left: 1rem;
+}
+
+.deliverable:first-child {
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.deliverable-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--gold);
+  padding-top: 0.2rem;
+}
+
+.deliverable-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.6rem;
+}
+
+.deliverable-content p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #5A5A6A;
+}
+
+.deliverable-tag {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-top: 0.7rem;
+}
+
+.tag-ai {
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--emerald);
+}
+
+.tag-web {
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--gold-dark);
+}
+
+.tag-content {
+  background: rgba(196, 120, 122, 0.1);
+  color: var(--rose);
+}
+
+.tag-strategy {
+  background: rgba(26, 26, 46, 0.08);
+  color: var(--text-dark);
+}
+
+/* ========== COMPARISON TABLE ========== */
+.comparison {
+  background: var(--ivory);
+  padding: 5rem 2rem;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 3rem auto 0;
+}
+
+@media (max-width: 700px) {
+  .comparison-grid { grid-template-columns: 1fr; }
+}
+
+.comp-card {
+  padding: 2.5rem;
+  border-radius: 12px;
+  position: relative;
+}
+
+.comp-card--other {
+  background: var(--warm-white);
+  border: 1px solid #E5E7EB;
+}
+
+.comp-card--ours {
+  background: var(--deep-navy);
+  color: white;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  box-shadow: 0 20px 60px rgba(10, 14, 26, 0.3);
+}
+
+.comp-card--ours::before {
+  content: 'RECOMENDADO';
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  background: var(--gold);
+  color: var(--deep-navy);
+  padding: 5px 14px;
+  border-radius: 2px;
+}
+
+.comp-header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.comp-card--other .comp-header { color: var(--text-muted); }
+.comp-card--ours .comp-header { color: var(--gold); }
+
+.comp-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+.comp-card--other .comp-price {
+  color: var(--text-dark);
+  text-decoration: line-through;
+  text-decoration-color: var(--rose);
+  opacity: 0.6;
+}
+
+.comp-card--ours .comp-price { color: var(--gold); }
+
+.comp-note {
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.comp-card--other .comp-note { color: var(--text-muted); }
+.comp-card--ours .comp-note { color: rgba(255,255,255,0.6); }
+
+.comp-list {
+  list-style: none;
+  padding: 0;
+}
+
+.comp-list li {
+  font-size: 0.88rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  line-height: 1.5;
+}
+
+.comp-card--ours .comp-list li {
+  border-bottom-color: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+}
+
+.comp-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.comp-card--other .comp-list li::before { background: #D1D5DB; }
+.comp-card--ours .comp-list li::before { background: var(--gold); }
+
+/* ========== OFFER SECTION ========== */
+.offer {
+  background: var(--deep-navy);
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem;
+}
+
+.offer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(201, 168, 76, 0.1) 0%, transparent 60%);
+}
+
+.offer-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.offer-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+}
+
+.offer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 500;
+  color: var(--warm-white);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.offer-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.offer-price-wrapper {
+  margin: 3rem 0;
+  padding: 3rem;
+  background: rgba(201, 168, 76, 0.05);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 16px;
+  position: relative;
+}
+
+.offer-original-price {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.4);
+  text-decoration: line-through;
+  margin-bottom: 0.5rem;
+}
+
+.offer-final-price {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.offer-savings {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--emerald-light);
+  background: rgba(45, 106, 79, 0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-top: 1rem;
+}
+
+.offer-note {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 1.5rem;
+  line-height: 1.7;
+}
+
+.timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(196, 120, 122, 0.15);
+  border: 1px solid rgba(196, 120, 122, 0.3);
+  color: var(--rose-soft);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin-top: 2rem;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.timer-dot {
+  width: 8px; height: 8px;
+  background: var(--rose);
+  border-radius: 50%;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* ========== PAYMENT PLAN ========== */
+.payment {
+  background: var(--warm-white);
+  padding: 5rem 2rem;
+}
+
+.payment-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.payment-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 900px) {
+  .payment-options { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 550px) {
+  .payment-options { grid-template-columns: 1fr; }
+}
+
+.payment-card {
+  padding: 2rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  background: white;
+}
+
+.payment-card:hover {
+  border-color: var(--gold);
+  box-shadow: 0 8px 30px rgba(201, 168, 76, 0.12);
+  transform: translateY(-4px);
+}
+
+.payment-card.featured {
+  border-color: var(--gold);
+  background: linear-gradient(to bottom, rgba(201, 168, 76, 0.03), white);
+}
+
+.payment-card.featured::before {
+  content: 'MÁS POPULAR';
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: var(--gold);
+  color: var(--deep-navy);
+  padding: 4px 12px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.payment-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.payment-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.payment-amount small {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.payment-detail {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  line-height: 1.6;
+}
+
+/* ========== RECOGNITION SECTION ========== */
+.recognition {
+  background: var(--ivory);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.recognition-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.recognition-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.recognition h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.recognition h2 em { color: var(--gold-dark); font-style: italic; }
+
+.recognition p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #5A5A6A;
+  margin-bottom: 1rem;
+}
+
+.highlight-box {
+  background: white;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+
+.highlight-box .hb-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.highlight-box .hb-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #4A4A5A;
+}
+
+.highlight-box .hb-text strong {
+  color: var(--text-dark);
+}
+
+/* ========== FINAL CTA ========== */
+.final-cta {
+  background: var(--deep-navy);
+  padding: 6rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(201, 168, 76, 0.06) 0%, transparent 50%);
+}
+
+.cta-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.8;
+  margin-bottom: 3rem;
+}
+
+.cta-question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.8rem);
+  font-weight: 500;
+  color: var(--warm-white);
+  margin-bottom: 2rem;
+  line-height: 1.3;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--deep-navy);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  padding: 18px 48px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(201, 168, 76, 0.3);
+}
+
+.cta-whatsapp {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 1rem;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--charcoal);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.footer-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.25);
+  text-transform: uppercase;
+}
+
+.payment-card.negotiate {
+  border-color: var(--rose);
+  background: linear-gradient(to bottom, rgba(196, 120, 122, 0.04), white);
+  border-style: dashed;
+}
+
+.payment-card.negotiate .payment-label {
+  color: var(--rose);
+}
+
+.payment-card.negotiate .payment-amount {
+  font-size: 1.4rem;
+  color: var(--rose);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  section { padding: 4rem 1.5rem; }
+  .deliverable { grid-template-columns: 50px 1fr; }
+  .offer-price-wrapper { padding: 2rem 1.5rem; }
+  .highlight-box { flex-direction: column; text-align: center; }
+}
+
+/* ========== GUARANTEE STRIP ========== */
+.guarantee {
+  background: var(--emerald);
+  padding: 2rem;
+  text-align: center;
+}
+
+.guarantee-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.9);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.guarantee-text strong {
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Propuesta Exclusiva</div>
+    <h1 class="hero-name">Maylyn, <br><em>es tiempo de brillar.</em></h1>
+    <p class="hero-subtitle">Tu ecosistema completo para transformar a miles de mujeres<br>y monetizar tu misión sin depender de nadie.</p>
+    <p class="hero-date">Marzo 2025 &nbsp;·&nbsp; Preparado por Carlos Medina &nbsp;·&nbsp; 5.000 Millas</p>
+  </div>
+  <div class="scroll-indicator">
+    <span>Descubre</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ==================== VISION QUOTE ==================== -->
+<section class="vision">
+  <div class="section-inner reveal">
+    <p class="vision-quote">
+      «Yo quiero que mi testimonio diga que si yo he podido, ellas también pueden. Quiero ser testimonio real de esos procesos. No me he parado. Es tiempo de brillar.»
+    </p>
+    <p class="vision-attribution">Maylyn López &nbsp;·&nbsp; 13 de marzo, 2025</p>
+  </div>
+</section>
+
+<!-- ==================== PROBLEM ==================== -->
+<section class="problem">
+  <div class="section-inner">
+    <p class="section-label reveal">El diagnóstico</p>
+    <h2 class="section-title reveal">Tienes la misión, el talento y la pasión. <br>Te falta <em>el sistema.</em></h2>
+    <p class="section-text reveal">
+      Maylyn, en nuestra conversación de hoy lo dejaste clarísimo: no estás en ninguna zona de confort. Llevas un año lanzándote sin paracaídas, invirtiendo tus ahorros en formación, manteniendo a dos hijos, rompiendo techos de cristal. Has llegado a 13.000 personas en Instagram publicando videos con el corazón. Te han invitado a un evento de 1.500 personas. Hiciste una directa con un empresario de 400 empresas en Italia.
+    </p>
+    <p class="section-text reveal">
+      Pero hoy, toda esa energía está fragmentada. Y eso no es culpa tuya — es una cuestión de arquitectura.
+    </p>
+
+    <div class="pain-points">
+      <div class="pain-point reveal">
+        <span class="pain-icon">⚡</span>
+        <p class="pain-text"><strong>Asesores de Instagram por un lado,</strong> Calendly recién abierto por otro, Beacons para productos digitales, un Linktree por actualizar, la idea de una membresía sin plataforma, mentorías sin campus... Estás invirtiendo en piezas sueltas que no se hablan entre sí.</p>
+      </div>
+      <div class="pain-point reveal">
+        <span class="pain-icon">🔥</span>
+        <p class="pain-text"><strong>Cada herramienta nueva es otra suscripción, otro login, otra curva de aprendizaje.</strong> Y mientras tanto, las mujeres que te necesitan no tienen un camino claro para llegar a ti, formarse contigo y transformarse.</p>
+      </div>
+      <div class="pain-point reveal">
+        <span class="pain-icon">🎯</span>
+        <p class="pain-text"><strong>Tú misma lo dijiste:</strong> «Necesitamos ejecutar el sistema. Todo necesita una estrategia, todo requiere un sistema que permita que donde uno esté, uno siga generando más allá de nosotros mismos.»</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TRANSITION ==================== -->
+<div class="transition-dark">
+  <p class="transition-text reveal">
+    ¿Y si en lugar de seguir armando el rompecabezas pieza por pieza... <strong>te entrego el rompecabezas completo, ya armado, funcionando y en dos idiomas?</strong>
+  </p>
+</div>
+
+<!-- ==================== SOLUTION ==================== -->
+<section class="solution">
+  <div class="section-inner">
+    <div class="eco-title-wrapper">
+      <p class="section-label reveal">La solución</p>
+      <h2 class="eco-title reveal">Tu Ecosistema <em>LeaderSHE</em></h2>
+      <p class="eco-subtitle reveal">Todo lo que necesitas en una sola plataforma. Nada más.</p>
+    </div>
+
+    <div class="deliverables">
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">01</span>
+        <div class="deliverable-content">
+          <h3>Plataforma Web LeaderSHE — Bilingüe</h3>
+          <p>Tu sitio web profesional con todo integrado: presentación del libro, tu historia como autora, llamados a la acción para mentorías, masterclasses y membresías. Diseño editorial de alta gama en español e italiano, responsive, optimizado para convertir visitantes en alumnas.</p>
+          <span class="deliverable-tag tag-web">Desarrollo Web</span>
+        </div>
+      </div>
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">02</span>
+        <div class="deliverable-content">
+          <h3>Campus Virtual de Formación</h3>
+          <p>Aula virtual con sistema de módulos, sesiones grabadas de Zoom, calendario de sesiones en vivo, biblioteca de recursos descargables (guías, PDFs, plantillas para Instagram). Acceso personalizado por alumna, con identificador único. Listo para cargar tus masterclasses y mentorías high-ticket en ambos idiomas.</p>
+          <span class="deliverable-tag tag-web">Plataforma</span>
+        </div>
+      </div>
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">03</span>
+        <div class="deliverable-content">
+          <h3>Asistente de Inteligencia Artificial 24/7</h3>
+          <p>Un agente por WhatsApp entrenado con toda tu filosofía LeaderSHE, tu libro, tus métodos, tus respuestas a preguntas frecuentes. Atiende a tus alumnas mientras tú duermes, viajas o preparas tu conferencia de 1.500 personas. Responde con preguntas socráticas, guía a los módulos correctos, agenda sesiones y filtra prospectos.</p>
+          <span class="deliverable-tag tag-ai">Inteligencia Artificial</span>
+        </div>
+      </div>
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">04</span>
+        <div class="deliverable-content">
+          <h3>Sistema de Embudo Completo</h3>
+          <p>Desde el primer contacto en Instagram hasta la compra de tu mentoría high-ticket: landing de captura, secuencia de valor, filtro de calificación, agendamiento en Calendly integrado y cierre. Todo automatizado para que el contenido que publicas en redes convierta en ingresos reales sin que tengas que estar pendiente 24 horas.</p>
+          <span class="deliverable-tag tag-strategy">Estrategia</span>
+        </div>
+      </div>
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">05</span>
+        <div class="deliverable-content">
+          <h3>Embudo de Diagnóstico Transformacional</h3>
+          <p>Un embudo especializado donde cada mujer que te descubra viva una experiencia de valor extremo y sincero antes de contactarte. Diagnóstico basado en constelaciones familiares, perfil Maxwell DISC y autoevaluación de liderazgo. Al completarlo, acceden a tu comunidad, descargan tu GPT personalizado entrenado con tu voz y filosofía, y agendan directamente contigo. No es un simple formulario — es una experiencia que transforma antes de la primera llamada.</p>
+          <span class="deliverable-tag tag-ai">IA + Estrategia</span>
+        </div>
+      </div>
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">06</span>
+        <div class="deliverable-content">
+          <h3>Tienda Online de Infoproductos</h3>
+          <p>Tu propia tienda digital integrada en la plataforma para vender guías, e-books, plantillas y productos digitales desde €5 hasta tus programas premium. Sin Beacons, sin herramientas externas, sin comisiones de terceros. Pasarela de pago directa. Tus productos digitales generando ingresos 24/7 mientras tú duermes, viajas o das tu conferencia de 1.500 personas.</p>
+          <span class="deliverable-tag tag-web">E-Commerce</span>
+        </div>
+      </div>
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">07</span>
+        <div class="deliverable-content">
+          <h3>Estrategia de Monetización LeaderSHE</h3>
+          <p>Diseño de tu escalera de valor completa: productos digitales de entrada (guías de €5–€7), membresía mensual, mentorías grupales y programa high-ticket de 90 días. Todo mapeado para que cada mujer que te descubra tenga un camino claro desde «te acabo de conocer» hasta «quiero tu transformación completa».</p>
+          <span class="deliverable-tag tag-strategy">Estrategia</span>
+        </div>
+      </div>
+
+      <div class="deliverable reveal">
+        <span class="deliverable-num">08</span>
+        <div class="deliverable-content">
+          <h3>Blog con IA — Contenido Automático</h3>
+          <p>Sistema de blog integrado en tu plataforma que genera artículos alineados a tu voz y filosofía LeaderSHE. Posicionamiento SEO para que mujeres que buscan liderazgo femenino, emprendimiento, superación personal te encuentren orgánicamente. Tu ecosistema trabaja mientras tú impactas.</p>
+          <span class="deliverable-tag tag-ai">Inteligencia Artificial</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMPARISON ==================== -->
+<section class="comparison">
+  <div class="section-inner">
+    <p class="section-label reveal" style="text-align:center;">La realidad en números</p>
+    <h2 class="section-title reveal" style="text-align:center;">Lo que costaría construir esto <em>por separado</em></h2>
+
+    <div class="comparison-grid">
+      <div class="comp-card comp-card--other reveal">
+        <p class="comp-header">Contratando por separado</p>
+        <p class="comp-price">€18.000+</p>
+        <p class="comp-note">Estimación mínima contratando freelancers y agencias individuales en Europa.</p>
+        <ul class="comp-list">
+          <li>Desarrollo web bilingüe: €3.000–€5.000</li>
+          <li>Campus virtual personalizado: €2.500–€4.000</li>
+          <li>Agente IA WhatsApp entrenado: €2.000–€3.000</li>
+          <li>Embudo diagnóstico especializado: €2.000–€3.500</li>
+          <li>Tienda online de infoproductos: €1.500–€2.500</li>
+          <li>Estrategia de monetización: €1.000–€1.500</li>
+          <li>Blog con IA + SEO: €800–€1.200</li>
+          <li>GPT personalizado con tu voz: €1.000–€2.000</li>
+          <li>Coordinación entre proveedores: ¿semanas? ¿meses?</li>
+          <li>Resultado: piezas que no se integran entre sí</li>
+        </ul>
+      </div>
+
+      <div class="comp-card comp-card--ours reveal">
+        <p class="comp-header">Con 5.000 Millas</p>
+        <p class="comp-price">€6.000</p>
+        <p class="comp-note">Todo integrado. Un solo interlocutor. Un solo ecosistema. Funcionando.</p>
+        <ul class="comp-list">
+          <li>Plataforma web bilingüe ES/IT</li>
+          <li>Campus virtual con módulos y sesiones</li>
+          <li>Asistente IA 24/7 por WhatsApp</li>
+          <li>Embudo diagnóstico transformacional</li>
+          <li>Tienda online de infoproductos</li>
+          <li>GPT personalizado con tu voz y filosofía</li>
+          <li>Estrategia de monetización diseñada</li>
+          <li>Blog automático con IA</li>
+          <li>Un solo proveedor que conoce tu historia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== RECOGNITION ==================== -->
+<section class="recognition">
+  <div class="recognition-content">
+    <div class="recognition-icon reveal">💎</div>
+    <h2 class="reveal">¿Por qué este precio <em>para ti</em>, Maylyn?</h2>
+    <p class="reveal">
+      Porque esto no es una transacción. Es una alianza.
+    </p>
+    <p class="reveal">
+      Tú ya invertiste €2.500 en la publicación de LeaderSHE conmigo. Además, invertiste de forma independiente en un diseñador gráfico para maquetar tu libro con una calidad que honra tu visión. Has demostrado con hechos — no con palabras — que te tomas esto en serio.
+    </p>
+
+    <div class="highlight-box reveal">
+      <span class="hb-icon">🤝</span>
+      <p class="hb-text">Esta oferta es mi recompensa por tu compromiso. <strong>El precio real de este ecosistema supera los €18.000.</strong> Lo que te propongo es que dejes de invertir un poco aquí y un poco allá, y con una sola inversión materialices todo.</p>
+    </div>
+
+    <div class="highlight-box reveal" style="border-color: rgba(196, 120, 122, 0.3); background: rgba(196, 120, 122, 0.03);">
+      <span class="hb-icon">🔥</span>
+      <p class="hb-text">Para que dimensiones lo que esto vale: <strong>yo mismo pagué hace poco €6.000 solo por recibir información.</strong> No una plataforma. No un ecosistema. No un sistema completo funcionando. Solo información. Lo que te estoy ofreciendo aquí es incomparablemente más grande. <strong>Toma esto como la señal que estabas buscando, Maylyn.</strong></p>
+    </div>
+
+    <p class="reveal">
+      Tú lo dijiste hoy: «Quiero que mi crecimiento sea también un crecimiento para tu proyecto, porque el libro forma parte de ese gran proyecto.» Eso, Maylyn, es exactamente lo que estoy construyendo contigo.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== OFFER ==================== -->
+<section class="offer">
+  <div class="offer-inner">
+    <p class="offer-eyebrow reveal">Oferta válida 48 horas</p>
+    <h2 class="offer-title reveal">Tu ecosistema completo <br>por <em>una fracción</em> de su valor</h2>
+
+    <div class="offer-price-wrapper reveal">
+      <p class="offer-original-price">Valor real: €18.000+</p>
+      <p class="offer-final-price">€6.000</p>
+      <p class="offer-savings">Ahorras más de €12.000</p>
+      <p class="offer-note">
+        Un solo ecosistema. Un solo pago (o plan). Un solo interlocutor que conoce tu libro, tu historia y tu misión desde el primer capítulo.
+      </p>
+      <div class="timer-badge">
+        <span class="timer-dot"></span>
+        Oferta exclusiva hasta el 15 de marzo, 2025
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PAYMENT PLAN ==================== -->
+<section class="payment">
+  <div class="payment-inner">
+    <p class="section-label reveal" style="text-align:center;">Planes de pago</p>
+    <h2 class="section-title reveal" style="text-align:center;">Elige el camino que <em>te funcione</em></h2>
+    <p class="section-text reveal" style="text-align:center;">Cuatro opciones diseñadas para que la inversión no sea un obstáculo, sino un impulso.</p>
+
+    <div class="payment-options">
+      <div class="payment-card reveal">
+        <p class="payment-label">Pago Único</p>
+        <p class="payment-amount">€5.500</p>
+        <p class="payment-detail">Descuento adicional de <strong>€500</strong> por pago anticipado completo. La opción más inteligente si dispones de la liquidez.</p>
+      </div>
+
+      <div class="payment-card featured reveal">
+        <p class="payment-label">2 Pagos</p>
+        <p class="payment-amount">€3.000 <small>× 2</small></p>
+        <p class="payment-detail">Primer pago para iniciar. Segundo pago a los 30 días. Total: €6.000. Comenzamos de inmediato.</p>
+      </div>
+
+      <div class="payment-card reveal">
+        <p class="payment-label">3 Pagos</p>
+        <p class="payment-amount">€2.100 <small>× 3</small></p>
+        <p class="payment-detail">Tres pagos mensuales de €2.100. Total: €6.300. Flexibilidad máxima para tu flujo actual. Arrancamos con el primero.</p>
+      </div>
+
+      <div class="payment-card negotiate reveal">
+        <p class="payment-label">¿Hablamos?</p>
+        <p class="payment-amount">Negociemos</p>
+        <p class="payment-detail">¿No dispones de mucha liquidez ahora mismo? <strong>Hablemos.</strong> De verdad quiero ayudarte, porque cada día sin tu ecosistema digital no solo estás dejando dinero sobre la mesa — hay miles de mujeres esperando descubrirte. Encontremos juntos la forma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== GUARANTEE ==================== -->
+<div class="guarantee">
+  <p class="guarantee-text reveal">
+    <strong>Mi compromiso:</strong> Si en los primeros 14 días no estás completamente convencida de la dirección que tomamos juntos, recalibraremos el proyecto sin costo adicional hasta que estés satisfecha. No te estoy vendiendo una plantilla — te estoy construyendo un legado.
+  </p>
+</div>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="final-cta">
+  <div class="cta-inner">
+    <p class="cta-quote reveal">
+      «Yo quiero decirle a una mujer: yo he podido. Y en seis meses mostrar el proceso, el sistema, y decir: estoy facturando, este fue el sistema.»
+    </p>
+    <h2 class="cta-question reveal">
+      Carlos, <br>¿dónde te hago<br> el primer pago?
+    </h2>
+    <a href="https://wa.me/message/XJ5SGFZ7LO5VM1" class="cta-button reveal">Responder a Carlos</a>
+    <p class="cta-whatsapp reveal">Responde a este mensaje o escríbeme directamente por WhatsApp</p>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <p class="footer-logo">5.000 Millas Editorial</p>
+  <p class="footer-text">Escribe tu libro. Escala tu negocio. Sin vender tu alma.</p>
+</footer>
+
+<!-- ==================== SCROLL REVEAL JS ==================== -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Parallax on hero
+    window.addEventListener('scroll', () => {
+      const hero = document.querySelector('.hero-content');
+      const scroll = window.pageYOffset;
+      if (scroll < window.innerHeight) {
+        hero.style.transform = `translateY(${scroll * 0.15}px)`;
+        hero.style.opacity = 1 - (scroll / (window.innerHeight * 0.8));
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
